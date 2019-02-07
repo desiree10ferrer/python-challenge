@@ -4,13 +4,17 @@ from collections import Counter
 
 csvpath = os.path.join('..', 'PyPoll', 'election_data.csv') 
 
+#create lists, variables
 votes = []
 candidate = []
 w = 0
+
+#opening csv file
 with open(csvpath, newline="") as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter=',')
     next(csvreader)
+#voting count, unique candidate list and votes 
     for row in csv.reader(csvfile):
         votes.append(row[0])
         candidate.append(row[2])
@@ -24,10 +28,12 @@ with open(csvpath, newline="") as csvfile:
     print(f"Total Votes: {(vote_count)}")
     print(f"----------------------------")
 
+#looping for percentage calculation
     for i in range (len(candidate_name)):
         per = (individual_votes[i]/vote_count)*100   
         print(f"{candidate_name[i]}: {format(per,'.3f')}% ({individual_votes[i]})")
 
+#looping for higher value
     for i in range(1, len(individual_votes)):
         if individual_votes[i] > individual_votes[w]:
             w = i
